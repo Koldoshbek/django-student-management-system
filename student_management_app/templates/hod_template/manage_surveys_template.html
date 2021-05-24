@@ -77,6 +77,7 @@
                                             <a href="{% url 'edit_survey' survey.id %}"
                                                class="btn btn-success">Edit</a>
                                             <a href="{% url 'delete_survey' survey.id %}" class="btn btn-danger">Delete</a>
+                                            <a href="{% url 'add_questions' survey.id %}" class="btn btn-secondary">Add Votes</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

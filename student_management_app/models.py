@@ -169,6 +169,11 @@ class Survey(models.Model):
 
 
 class SurveyQuestion(models.Model):
+    survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
+    question = models.CharField(max_length=256)
+
+
+class Votes(models.Model):
     mark_choices = [
         (1, '1'),
         (2, '2'),
@@ -176,9 +181,9 @@ class SurveyQuestion(models.Model):
         (4, '4'),
         (5, '5'),
     ]
-    survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
     mark = models.IntegerField(choices=mark_choices)
-    question = models.CharField(max_length=256)
+    question = models.ForeignKey(SurveyQuestion, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
 
 # Creating Django Signals

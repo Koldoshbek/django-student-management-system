@@ -65,6 +65,7 @@ urlpatterns = [
     path('delete_survey/<survey_id>/', HodViews.delete_survey, name="delete_survey"),
     path('add_survey/', HodViews.add_survey, name="add_survey"),
     path('add_survey_save/', HodViews.add_survey_save, name="add_survey_save"),
+    path('add_questions/<survey_id>/', HodViews.add_questions, name="add_questions"),
     # URLS for Staff
     path('staff_home/', StaffViews.staff_home, name="staff_home"),
     path('staff_take_attendance/', StaffViews.staff_take_attendance, name="staff_take_attendance"),

@@ -1,3 +1,4 @@
+from django.forms import modelformset_factory
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib import messages
@@ -8,7 +9,8 @@ from django.core import serializers
 import json
 
 from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, \
-    FeedBackStudent, FeedBackStaffs, LeaveReportStudent, LeaveReportStaff, Attendance, AttendanceReport, Survey
+    FeedBackStudent, FeedBackStaffs, LeaveReportStudent, LeaveReportStaff, Attendance, AttendanceReport, Survey, \
+    SurveyQuestion
 from .forms import AddStudentForm, EditStudentForm
 
 
@@ -860,3 +862,20 @@ def delete_survey(request, survey_id):
     except:
         messages.error(request, "Failed to Delete Survey.")
         return redirect('manage_survey')
+
+
+def add_questions(request, survey_id):
+    survey = Survey.objects.get(id=survey_id)
+    QuestionsFormSet = modelformset_factory(SurveyQuestion, fields=('question', 'survey'))
+
+    if request.method == 'POST':
+        form = QuestionsFormSet(request.POST, initial=[{'survey': survey}])
+        instances = form.save()
+    form = QuestionsFormSet(initial=[{'survey': survey}])
+
+    context = {
+        "survey": survey,
+        "id": survey_id,
+        "form": form,
+    }
+    return render(request, 'hod_template/add_questions_template.html', context)

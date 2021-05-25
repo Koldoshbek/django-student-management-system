@@ -1,8 +1,6 @@
-
 from django.urls import path, include
 from . import views
-from .import HodViews, StaffViews, StudentViews
-
+from . import HodViews, StaffViews, StudentViews
 
 urlpatterns = [
     path('', views.loginPage, name="login"),
@@ -44,7 +42,8 @@ urlpatterns = [
     path('check_email_exist/', HodViews.check_email_exist, name="check_email_exist"),
     path('check_username_exist/', HodViews.check_username_exist, name="check_username_exist"),
     path('student_feedback_message/', HodViews.student_feedback_message, name="student_feedback_message"),
-    path('student_feedback_message_reply/', HodViews.student_feedback_message_reply, name="student_feedback_message_reply"),
+    path('student_feedback_message_reply/', HodViews.student_feedback_message_reply,
+         name="student_feedback_message_reply"),
     path('staff_feedback_message/', HodViews.staff_feedback_message, name="staff_feedback_message"),
     path('staff_feedback_message_reply/', HodViews.staff_feedback_message_reply, name="staff_feedback_message_reply"),
     path('student_leave_view/', HodViews.student_leave_view, name="student_leave_view"),
@@ -66,6 +65,8 @@ urlpatterns = [
     path('add_survey/', HodViews.add_survey, name="add_survey"),
     path('add_survey_save/', HodViews.add_survey_save, name="add_survey_save"),
     path('add_questions/<survey_id>/', HodViews.add_questions, name="add_questions"),
+    path('votes/', HodViews.votes, name="votes"),
+    path('votes_detail/<survey_id>/', HodViews.votes_detail, name="votes_detail"),
     # URLS for Staff
     path('staff_home/', StaffViews.staff_home, name="staff_home"),
     path('staff_take_attendance/', StaffViews.staff_take_attendance, name="staff_take_attendance"),
@@ -87,7 +88,8 @@ urlpatterns = [
     # URSL for Student
     path('student_home/', StudentViews.student_home, name="student_home"),
     path('student_view_attendance/', StudentViews.student_view_attendance, name="student_view_attendance"),
-    path('student_view_attendance_post/', StudentViews.student_view_attendance_post, name="student_view_attendance_post"),
+    path('student_view_attendance_post/', StudentViews.student_view_attendance_post,
+         name="student_view_attendance_post"),
     path('student_apply_leave/', StudentViews.student_apply_leave, name="student_apply_leave"),
     path('student_apply_leave_save/', StudentViews.student_apply_leave_save, name="student_apply_leave_save"),
     path('student_feedback/', StudentViews.student_feedback, name="student_feedback"),

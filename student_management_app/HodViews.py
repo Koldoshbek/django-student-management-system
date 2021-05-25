@@ -1,4 +1,4 @@
-from django.forms import modelformset_factory
+from django.forms import modelformset_factory, inlineformset_factory
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib import messages
@@ -10,8 +10,8 @@ import json
 
 from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, \
     FeedBackStudent, FeedBackStaffs, LeaveReportStudent, LeaveReportStaff, Attendance, AttendanceReport, Survey, \
-    SurveyQuestion
-from .forms import AddStudentForm, EditStudentForm
+    SurveyQuestion, Votes
+from .forms import AddStudentForm, EditStudentForm, VotesForm
 
 
 def admin_home(request):
@@ -879,3 +879,22 @@ def add_questions(request, survey_id):
         "form": form,
     }
     return render(request, 'hod_template/add_questions_template.html', context)
+
+
+def votes(request):
+    surveys = Survey.objects.all()
+    context = {'surveys': surveys}
+    return render(request, 'hod_template/votes.html', context)
+
+
+def votes_detail(request, survey_id):
+    questions = SurveyQuestion.objects.filter(survey_id=survey_id)
+    question_forms = []
+    VotesFormSet = inlineformset_factory(SurveyQuestion, Votes, can_delete=False, extra=1, form=VotesForm)
+    for question in questions:
+        question_form = VotesFormSet(instance=question)
+        question_forms.append(question_form)
+    context = {
+        'question_forms': question_forms,
+    }
+    return render(request, 'hod_template/votes_detail.html', context)

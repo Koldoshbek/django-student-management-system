@@ -172,15 +172,12 @@ class SurveyQuestion(models.Model):
     survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
     question = models.CharField(max_length=256)
 
+    def __str__(self):
+        return self.question
+
 
 class Votes(models.Model):
-    mark_choices = [
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-    ]
+    mark_choices = [(x, str(x)) for x in range(1, 11)]
     mark = models.IntegerField(choices=mark_choices)
     question = models.ForeignKey(SurveyQuestion, on_delete=models.CASCADE)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)

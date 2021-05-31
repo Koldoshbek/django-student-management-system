@@ -5,9 +5,8 @@ from django.contrib import messages
 from django.core.files.storage import FileSystemStorage  # To upload Profile Picture
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from django.core import serializers
 import json
-
+from django.db.models import Avg
 from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, \
     FeedBackStudent, FeedBackStaffs, LeaveReportStudent, LeaveReportStaff, Attendance, AttendanceReport, Survey, \
     SurveyQuestion, Votes
@@ -866,13 +865,13 @@ def delete_survey(request, survey_id):
 
 def add_questions(request, survey_id):
     survey = Survey.objects.get(id=survey_id)
-    QuestionsFormSet = modelformset_factory(SurveyQuestion, fields=('question', 'survey'))
+    QuestionsFormSet = modelformset_factory(SurveyQuestion,
+                                            fields=('question', 'survey'))
 
     if request.method == 'POST':
         form = QuestionsFormSet(request.POST, initial=[{'survey': survey}])
         instances = form.save()
     form = QuestionsFormSet(initial=[{'survey': survey}])
-
     context = {
         "survey": survey,
         "id": survey_id,
@@ -889,12 +888,28 @@ def votes(request):
 
 def votes_detail(request, survey_id):
     questions = SurveyQuestion.objects.filter(survey_id=survey_id)
-    question_forms = []
-    VotesFormSet = inlineformset_factory(SurveyQuestion, Votes, can_delete=False, extra=1, form=VotesForm)
-    for question in questions:
-        question_form = VotesFormSet(instance=question)
-        question_forms.append(question_form)
     context = {
-        'question_forms': question_forms,
+        'questions': questions,
+        'survey_id': survey_id,
     }
     return render(request, 'hod_template/votes_detail.html', context)
+
+
+def votes_save(request):
+    if request.method == "POST":
+        questions = SurveyQuestion.objects.filter(survey_id=int(request.POST.get('survey_id')))
+        for i in questions:
+            vote = Votes()
+            vote.question_id = int(request.POST.get('question{}'.format(i.id)))
+            vote.user_id = int(request.POST.get('user'))
+            vote.mark = int(request.POST.get('mark{}'.format(i.id)))
+            vote.save()
+    return redirect('votes')
+
+
+def votes_result(request):
+    results = Votes.objects.values_list('question__survey__subjects__subject_name').annotate(Avg('mark'))
+    context = {
+        'results': results
+    }
+    return render(request, 'hod_template/votes_result.html', context)

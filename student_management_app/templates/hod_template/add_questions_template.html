@@ -42,13 +42,13 @@
                                 </div>
                             {% endif %}
                             <div class="card-body">
-                            {{ form.management_form }}
+                                {{ form.management_form }}
                                 {% for foo in form %}
                                     {{ foo.survey.as_hidden }}
-                                    {{ foo.question }} <br>
+                                    {% if foo.survey.value == survey.id %}
+                                        {{ foo.question }} <br>
+                                    {% endif %}
                                 {% endfor %}
-
-
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Add Votes</button>

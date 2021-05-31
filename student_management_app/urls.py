@@ -67,6 +67,8 @@ urlpatterns = [
     path('add_questions/<survey_id>/', HodViews.add_questions, name="add_questions"),
     path('votes/', HodViews.votes, name="votes"),
     path('votes_detail/<survey_id>/', HodViews.votes_detail, name="votes_detail"),
+    path('votes_save/', HodViews.votes_save, name="votes_save"),
+    path('votes_result/', HodViews.votes_result, name="votes_result"),
     # URLS for Staff
     path('staff_home/', StaffViews.staff_home, name="staff_home"),
     path('staff_take_attendance/', StaffViews.staff_take_attendance, name="staff_take_attendance"),

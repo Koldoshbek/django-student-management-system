@@ -25,17 +25,27 @@
                             </div>
                         </div>
                         <div class="card-body table-responsive p-0">
-                            {% for question_form in question_forms %}
-                                <form class="petname_form" action="" method="post">
-                                    {% csrf_token %}
-                                    {{ question_form.instance.question }}
+                            <form action="{% url 'votes_save' %}" method="post">
+                            {% csrf_token %}
+                                <input type="text" name="user" value="{{ request.user.id }}" hidden>
+                                <input type="text" name="survey_id" value="{{ survey_id }}" hidden>
+                                {% for question in questions %}
+                                    <label for="">{{ question.question }}</label>
+                                    <input type="text" name="question{{ question.id }}" value="{{ question.id }}" hidden>
+                                    <input type="radio" name="mark{{ question.id }}" value="1">
+                                    <input type="radio" name="mark{{ question.id }}" value="2">
+                                    <input type="radio" name="mark{{ question.id }}" value="3">
+                                    <input type="radio" name="mark{{ question.id }}" value="4">
+                                    <input type="radio" name="mark{{ question.id }}" value="5">
+                                    <input type="radio" name="mark{{ question.id }}" value="6">
+                                    <input type="radio" name="mark{{ question.id }}" value="7">
+                                    <input type="radio" name="mark{{ question.id }}" value="8">
+                                    <input type="radio" name="mark{{ question.id }}" value="9">
+                                    <input type="radio" name="mark{{ question.id }}" value="10">
                                     <br>
-                                    {{ question_form.as_table }}
-                                    {{ question_form.inline_form.as_table }}
-
-                                </form>
-                                <br>
-                            {% endfor %}
+                                {% endfor %}
+                            <button type="submit">save</button>
+                            </form>
                         </div>
                     </div>
                 </div>

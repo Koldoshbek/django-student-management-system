@@ -56,6 +56,9 @@ class Subjects(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
+    def __str__(self):
+        return self.subject_name
+
 
 class Students(models.Model):
     id = models.AutoField(primary_key=True)
@@ -180,7 +183,7 @@ class Votes(models.Model):
     mark_choices = [(x, str(x)) for x in range(1, 11)]
     mark = models.IntegerField(choices=mark_choices)
     question = models.ForeignKey(SurveyQuestion, on_delete=models.CASCADE)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 
 # Creating Django Signals

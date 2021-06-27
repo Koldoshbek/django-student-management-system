@@ -880,10 +880,16 @@ def add_questions(request, survey_id):
     return render(request, 'hod_template/add_questions_template.html', context)
 
 
-
 def votes_result(request):
-    results = Votes.objects.values_list('question__survey__subjects__subject_name').annotate(Avg('mark'))
+    data = {}
+    votes = Votes.objects.all()
+    for vote in votes:
+        data[vote.question.survey.subjects.subject_name] = {}
+        for num, i in enumerate(Votes.objects.filter(
+                question__survey__subjects__subject_name=vote.question.survey.subjects.subject_name).values_list(
+            'question__question').annotate(Avg('mark'))):
+            data[vote.question.survey.subjects.subject_name][i[0]] = {'mark': round(float(i[1])*10, 2)}
     context = {
-        'results': results
+        'results': data
     }
     return render(request, 'hod_template/votes_result.html', context)

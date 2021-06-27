@@ -28,12 +28,14 @@
                                 <thead>
                                 <tr>
                                     <th>Аты</th>
+                                    <th>Сабак</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for survey in surveys %}
                                     <tr>
                                         <td><a href="{% url 'votes_detail' survey.id %}">{{ survey.name }}</a></td>
+                                        <td>{{ survey.subjects }}</td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

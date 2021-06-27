@@ -5,7 +5,7 @@
       <a href="{% url 'staff_home' %}" class="brand-link">
         <img src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light">Open University</span>
+        <span class="brand-text font-weight-light">Окуу жайдын аты</span>
       </a>
 
       <!-- Sidebar -->
@@ -31,7 +31,7 @@
               <a href="{{ staff_home }}" class="nav-link {% if request.path == staff_home %} active {% endif %}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
-                  Home
+                  Башкы бет
                   {% comment %} <span class="right badge badge-danger">New</span> {% endcomment %}
                 </p>
               </a>
@@ -42,7 +42,7 @@
               <a href="{{ staff_take_attendance }}" class="nav-link {% if request.path == staff_take_attendance %} active {% endif %}">
                 <i class="nav-icon fas fa-calendar-plus"></i>
                 <p>
-                  Take Attendance
+                  Катышуу (жоктомо)
                   {% comment %} <span class="right badge badge-danger">New</span> {% endcomment %}
                 </p>
               </a>
@@ -53,7 +53,7 @@
               <a href="{{ staff_update_attendance }}" class="nav-link {% if request.path == staff_update_attendance %} active {% endif %}">
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 <p>
-                  View Update Attendance
+                  Катышуунун жаңылануусун көрүү
                   {% comment %} <span class="right badge badge-danger">New</span> {% endcomment %}
                 </p>
               </a>
@@ -64,7 +64,7 @@
               <a href="{{ staff_add_result }}" class="nav-link {% if request.path == staff_add_result %} active {% endif %}">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>
-                  Add Result
+                  Жыйынтык кошуу
                   {% comment %} <span class="right badge badge-danger">New</span> {% endcomment %}
                 </p>
               </a>
@@ -75,7 +75,7 @@
               <a href="{{ staff_apply_leave }}" class="nav-link {% if request.path == staff_apply_leave %} active {% endif %}">
                 <i class="nav-icon fas fa-envelope-open-text"></i>
                 <p>
-                  Apply Leave
+                    Өргүү колдонуу
                   {% comment %} <span class="right badge badge-danger">New</span> {% endcomment %}
                 </p>
               </a>
@@ -86,7 +86,7 @@
               <a href="{{ staff_feedback }}" class="nav-link {% if request.path == staff_feedback %} active {% endif %}">
                 <i class="nav-icon fas fa-comments"></i>
                 <p>
-                  Feedback
+                  Пикирлер
                   {% comment %} <span class="right badge badge-danger">New</span> {% endcomment %}
                 </p>
               </a>

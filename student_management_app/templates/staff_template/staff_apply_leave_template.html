@@ -1,7 +1,7 @@
 {% extends 'staff_template/base_template.html' %}
 
 {% block page_title %}
-    Leave Report and Apply for Leave
+    Отчетту калтырыңыз жана өргүүгө арыз бериңиз
 {% endblock page_title %}
 
 {% block main_content %}
@@ -16,7 +16,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Apply For Leave</h3>
+                        <h3 class="card-title">Өргүүгө арыз берүү</h3>
                     </div>
                     <!-- /.card-header -->
 
@@ -50,13 +50,13 @@
                         <div class="card-body">
                            
                             <div class="form-group">
-                                <label>Leave Date </label>
+                                <label>Чыгуу датасы </label>
                                 <input type="date" name="leave_date" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <label>Leave Reason </label>
-                                <textarea name="leave_message" class="form-control" rows="6" placeholder="Leave Messge"></textarea>
+                                <label>Чыгуу себеби </label>
+                                <textarea name="leave_message" class="form-control" rows="6" placeholder="Арыз каты"></textarea>
                             </div>
 
 
@@ -64,7 +64,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Apply for Leave</button>
+                        <button type="submit" class="btn btn-primary">Өргүүгө арыз берүү</button>
                         </div>
 
                     </form>
@@ -81,7 +81,7 @@
                 <div class="col-md-12">
                     <div class="card card-success">
                         <div class="card-header">
-                            <h3 class="card-title">Leave Apply History</h3>
+                            <h3 class="card-title">Арыз берүү</h3>
                         </div>
 
                         <div class="card-body">
@@ -90,9 +90,9 @@
                                     <thead class="thead-light">
                                     <tr>
                                         <th>#ID</th>
-                                        <th>Leave Date</th>
-                                        <th>Leave Message</th>
-                                        <th>Status</th>
+                                        <th>Чыгуу датасы</th>
+                                        <th>Чыгуу каты</th>
+                                        <th>Статус</th>
                                     </tr>
                                     </thead>
                                     
@@ -103,11 +103,11 @@
                                         <td>{{ leave.leave_message }}</td>
                                         <td>
                                             {% if leave.leave_status == 1 %}
-                                                <span class="alert alert-success">Approved</span>
+                                                <span class="alert alert-success">Бекитилген</span>
                                             {% elif leave.leave_status == 2 %}
-                                                <span class="alert alert-danger">Rejected</span>
+                                                <span class="alert alert-danger">Бекитилген жок</span>
                                             {% else %}
-                                                <span class="alert alert-warning">Pending</span>
+                                                <span class="alert alert-warning">Күтүүдө</span>
                                             {% endif %}
                                         </td>
                                     </tr>

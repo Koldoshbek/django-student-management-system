@@ -65,9 +65,7 @@ urlpatterns = [
     path('add_survey/', HodViews.add_survey, name="add_survey"),
     path('add_survey_save/', HodViews.add_survey_save, name="add_survey_save"),
     path('add_questions/<survey_id>/', HodViews.add_questions, name="add_questions"),
-    path('votes/', HodViews.votes, name="votes"),
-    path('votes_detail/<survey_id>/', HodViews.votes_detail, name="votes_detail"),
-    path('votes_save/', HodViews.votes_save, name="votes_save"),
+
     path('votes_result/', HodViews.votes_result, name="votes_result"),
     # URLS for Staff
     path('staff_home/', StaffViews.staff_home, name="staff_home"),
@@ -99,4 +97,7 @@ urlpatterns = [
     path('student_profile/', StudentViews.student_profile, name="student_profile"),
     path('student_profile_update/', StudentViews.student_profile_update, name="student_profile_update"),
     path('student_view_result/', StudentViews.student_view_result, name="student_view_result"),
+    path('votes/', StudentViews.votes, name="votes"),
+    path('votes_detail/<survey_id>/', StudentViews.votes_detail, name="votes_detail"),
+    path('votes_save/', StudentViews.votes_save, name="votes_save"),
 ]

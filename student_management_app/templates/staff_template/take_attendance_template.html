@@ -1,7 +1,7 @@
 {% extends 'staff_template/base_template.html' %}
 
 {% block page_title %}
-    Take Attendance
+    Катышуу тууралуу маалыматты көрүү
 {% endblock page_title %}
 
 {% block main_content %}
@@ -16,7 +16,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Take Attendance</h3>
+                        <h3 class="card-title">Катышуу тууралуу маалыматты көрүү</h3>
                     </div>
                     <!-- /.card-header -->
 
@@ -49,7 +49,7 @@
                         <div class="card-body">
                            
                             <div class="form-group">
-                                <label>Subject </label>
+                                <label>Сабак </label>
                                 <select class="form-control" name="subject" id="subject">
                                     {% for subject in subjects %}
                                         <option value="{{ subject.id }}">{{ subject.subject_name }}</option>
@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Session Year </label>
+                                <label>Сессия жылы </label>
                                 <select class="form-control" name="session_year" id="session_year">
                                     {% for session_year in session_years %}
                                         <option value="{{ session_year.id }}">{{ session_year.session_start_year }} to {{ session_year.session_end_year }}</option>
@@ -71,7 +71,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                        <button type="button" class="btn btn-primary" id="fetch_student">Fetch Student</button>
+                        <button type="button" class="btn btn-primary" id="fetch_student">Окучууну көрүү</button>
                         </div>
 
                         {% comment %} Displaying Students Here {% endcomment %}
@@ -122,13 +122,13 @@
                 }
                 div_data+="</div></div>";
                 div_data+="<div class='form-group'>";
-                div_data+="<button id='save_attendance' class='btn btn-success' type='button'>Save Attendance Data</button>";
+                div_data+="<button id='save_attendance' class='btn btn-success' type='button'>Катышуу маалыматын сактоо</button>";
                 div_data+="</div>";
                 $("#student_data").html(div_data);
 
             })
             .fail(function(){
-                alert("Error in Fetching Students.")
+                alert("Окучууну көргөзүүдө ката чыкты. (")
             })
 
             // Save Attendance Data to Database

@@ -880,32 +880,6 @@ def add_questions(request, survey_id):
     return render(request, 'hod_template/add_questions_template.html', context)
 
 
-def votes(request):
-    surveys = Survey.objects.all()
-    context = {'surveys': surveys}
-    return render(request, 'hod_template/votes.html', context)
-
-
-def votes_detail(request, survey_id):
-    questions = SurveyQuestion.objects.filter(survey_id=survey_id)
-    context = {
-        'questions': questions,
-        'survey_id': survey_id,
-    }
-    return render(request, 'hod_template/votes_detail.html', context)
-
-
-def votes_save(request):
-    if request.method == "POST":
-        questions = SurveyQuestion.objects.filter(survey_id=int(request.POST.get('survey_id')))
-        for i in questions:
-            vote = Votes()
-            vote.question_id = int(request.POST.get('question{}'.format(i.id)))
-            vote.user_id = int(request.POST.get('user'))
-            vote.mark = int(request.POST.get('mark{}'.format(i.id)))
-            vote.save()
-    return redirect('votes')
-
 
 def votes_result(request):
     results = Votes.objects.values_list('question__survey__subjects__subject_name').annotate(Avg('mark'))

@@ -1,7 +1,7 @@
 {% extends 'staff_template/base_template.html' %}
 
 {% block page_title %}
-    View Update Attendance
+    Жаңыланган катышууну көрүү
 {% endblock page_title %}
 
 {% block main_content %}
@@ -16,7 +16,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">View Update Attendance</h3>
+                        <h3 class="card-title">Жаңыланган катышууну көрүү</h3>
                     </div>
                     <!-- /.card-header -->
 
@@ -49,7 +49,7 @@
                         <div class="card-body">
                            
                             <div class="form-group">
-                                <label>Subject </label>
+                                <label>Сабак </label>
                                 <select class="form-control" name="subject" id="subject">
                                     {% for subject in subjects %}
                                         <option value="{{ subject.id }}">{{ subject.subject_name }}</option>
@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Session Year </label>
+                                <label>Сессия жылы </label>
                                 <select class="form-control" name="session_year_id" id="session_year_id">
                                     {% for session_year in session_years %}
                                         <option value="{{ session_year.id }}">{{ session_year.session_start_year }} to {{ session_year.session_end_year }}</option>
@@ -71,12 +71,12 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="button" class="btn btn-primary" id="fetch_attendance">Fetch Attendance Date</button>
+                            <button type="button" class="btn btn-primary" id="fetch_attendance">Катышуу датасын көрүү</button>
                         </div>
 
                         <div class="card-footer">
                             <div class="form-group" id="attendance_block" style="display:none;">
-                                    <label>Attendance Date </label>
+                                    <label>Катышуу датасы </label>
                                     <select class="form-control" name="attendance_date" id="attendance_date">
                                         
                                     </select>
@@ -95,7 +95,7 @@
 
                             <div class="card-footer" id="fetch_student_block" style="display:none;">
 
-                                <button type="button" class="btn btn-primary" id="fetch_student">Fetch Student Data</button>
+                                <button type="button" class="btn btn-primary" id="fetch_student">Окуучунун маалыматын көрүү</button>
                             </div>
                             
                             <!-- /.card-body -->
@@ -162,7 +162,7 @@
                     }
                     else
                     {
-                        $("#error_attendance").html("No Attendance Data Found.");
+                        $("#error_attendance").html("Катышуу тууралуу маалымат табылбады");
                         $("#error_attendance").show();
                         $("#attendance_block").hide();
                         $("#fetch_student_block").hide();
@@ -201,7 +201,7 @@
                 var json_data=JSON.parse(response);
                 console.log(json_data)
                 //Displaying Attendance Date Input and Students Attendance
-                var div_data="<div class='form-group'><label>Student Attendance: </label></div>"
+                var div_data="<div class='form-group'><label>Окучуунун катышуусу: </label></div>"
                 div_data+="<div class='form-group'><div class='row'>"
 
                 for(key in json_data)
@@ -241,7 +241,7 @@
 
             })
             .fail(function(){
-                alert("Error in Fetching Students.")
+                alert("Окучууларды көрүүдө ката чыкты! (")
             })
 
 
@@ -283,11 +283,11 @@
                     
                     if(response=="OK")
                     {
-                        alert("Attendance Saved!")
+                        alert("Жоктомо сакталды!")
                     }
                     else
                     {
-                        alert("Failed to Save Attendance!")
+                        alert("Жоктомо сакталбады!")
                     }
                     location.reload()
                     
@@ -295,7 +295,7 @@
                 })
 
                 .fail(function(){
-                    alert("Error in Saving Students Attendance Data.")
+                    alert("Окучуунун катышуусун сактоодо ката чыкты!(")
                 })
 
             })
